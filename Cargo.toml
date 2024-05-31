@@ -1,0 +1,9 @@
+[package]
+name = "lobrust"
+version = "0.1.0"
+edition = "2021"
+description = "Lobster movie streamer re-written in rust"
+
+[dependencies]
+clap = {version="4.5.4",features = [ "derive" ] }
+
