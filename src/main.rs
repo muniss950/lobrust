@@ -1,5 +1,6 @@
 use clap::Parser;
 use lobrust::cli::Args; 
+use lobrust::utils;
 
 // fn main() {
 //      let args = Cli::parse();
@@ -83,11 +84,14 @@ fn main() {
     }
 
 
-    // if args.debug {
-    //     println!("Debug mode enabled...");
-    // }
+    if args.debug {
+        println!("Debug mode enabled...");
+    }
 
     if let Some(query) = args.query {
         println!("Searching for query: {}", query);
+    }
+    else{
+        utils::get_input(args);
     }
 }

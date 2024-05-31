@@ -19,7 +19,7 @@ pub struct Args {
     pub clear_history: bool,
 
     /// Downloads movie or episode that is selected (if no path is provided, it defaults to the current directory)
-    #[arg(short, long)]
+    #[arg(short='d', long)]
     pub download: Option<Option<String>>,
 
     /// Edit config file using an editor defined with lobster_editor in the config (\$EDITOR by default)
@@ -72,9 +72,9 @@ pub struct Args {
     pub update: bool,
 
 
-    // /// Enable debug mode (prints out debug info to stdout and also saves it to /tmp/lobster.log)
-    // #[arg(short, long)]
-    // pub debug: bool,
+    /// Enable debug mode (prints out debug info to stdout and also saves it to /tmp/lobster.log)
+    #[arg(short='x', long)]
+    pub debug: bool,
 
     /// The query to search for a Movie/TV Show
     #[arg(value_name = "query")]
