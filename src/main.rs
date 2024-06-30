@@ -88,10 +88,13 @@ fn main() {
         println!("Debug mode enabled...");
     }
 
-    if let Some(query) = args.query {
-        println!("Searching for query: {}", query);
-    }
-    else{
-        utils::get_input(args);
-    }
+    match args.query{
+        Some(query)=>{
+            println!("Searching for query: {}", query);
+        }
+        None=>{
+           print!("Search Movie/TV show: "); 
+            utils::get_input();
+        }
+    };
 }
