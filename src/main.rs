@@ -8,6 +8,7 @@ use lobrust::utils;
 // }
 
 fn main() {
+    let base="flixhq.to";
     // Parse the command-line arguments
     let args = Args::parse();
 
@@ -91,10 +92,12 @@ fn main() {
     match args.query{
         Some(query)=>{
             println!("Searching for query: {}", query);
+            utils::search(base, &query);
         }
         None=>{
            print!("Search Movie/TV show: "); 
-            utils::get_input();
+            let query=utils::get_input().expect("type something");
+            utils::search(base, &query);
         }
     };
 }
