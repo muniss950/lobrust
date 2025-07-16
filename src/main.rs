@@ -8,7 +8,7 @@ use lobrust::utils;
 // }
 
 fn main() {
-    let base="flixhq.to";
+    let base="flixhq-tv.lol";
     // Parse the command-line arguments
     let args = Args::parse();
 

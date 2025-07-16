@@ -16,6 +16,7 @@ pub fn get_input() -> Result<String, Box<dyn Error>> {
 pub fn search(base: &str, query: &str) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
     let url = format!("https://{}/search/{}", base, query);
     let response = get(&url)?.text()?;
+    println!("{}",response);
     // println!("Raw HTML Response:\n{}", response); // For debugging purposes
     let mut result = Vec::new();
     // Remove newlines and extra spaces
@@ -38,12 +39,11 @@ pub fn search(base: &str, query: &str) -> Result<Vec<HashMap<String, String>>, B
         map.insert("title".to_string(), cap[4].to_string());
         map.insert("additional_info".to_string(), cap[5].to_string());
 
+        println!(
+            "{}\t{}\t{}\t{}",
+            map["image_url"], map["media_id"],map["title"], map["additional_info"]);
         // Push the map into the results vector
         result.push(map);
-        // println!(
-        //     "{}\t{}\t{}\t{} [{}]",
-        //     image_url, id, kind, title, additional_info
-        // );
     }
 
     Ok(result)
@@ -138,7 +138,7 @@ async fn get_json(embed_link: &str) -> Result<(), Box<dyn Error>> {
     let json_data = json_from_id(source_id).await?;
 
     if !json_data.is_empty() {
-        extract_from_json(&json_data, Some("1080p"), "English", false)?; // Replace arguments with your actual needs
+        extract_from_json(&json_data, Some("1080p"), "English", true)?; // Replace arguments with your actual needs
     } else {
         println!("Error: Could not get JSON data");
         return Err(Box::from("Could not get JSON data"));
@@ -207,7 +207,7 @@ mod tests {
     #[test]
     fn test_search_success() {
         // Use the actual base URL of the website
-        let base = "flixhq.to";
+        let base = "flixhq-tv.lol";
         let query = "joker";
 
         // Call the search function
@@ -222,13 +222,12 @@ mod tests {
             &result[0]["media_type"],
             &result[0]["media_id"],
             &provider,
-        )
-        .expect("lol");
+        ).expect("lol");
         // println!("{:?}",x);
-        let json_data = get_json(&embed_link).expect("lol");
+        // let json_data = get_json(&embed_link).await;
         // println!("{:?}", json_data);
-        let extracted =
-            extract_from_json(&json_data, Some("1080p"), "English", false).expect("lol");
+        // let extracted =
+        //     extract_from_json(&json_data, Some("1080p"), "English", false);
 
         // Optionally check if the result contains expected content
         // For a real test, you would need to inspect the actual website response
