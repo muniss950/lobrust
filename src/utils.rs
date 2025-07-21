@@ -16,7 +16,7 @@ pub fn get_input() -> Result<String, Box<dyn Error>> {
 pub fn search(base: &str, query: &str) -> Result<Vec<HashMap<String, String>>, Box<dyn Error>> {
     let url = format!("https://{}/search/{}", base, query);
     let response = get(&url)?.text()?;
-    println!("{}",response);
+    // println!("{}",response);
     // println!("Raw HTML Response:\n{}", response); // For debugging purposes
     let mut result = Vec::new();
     // Remove newlines and extra spaces
@@ -40,8 +40,8 @@ pub fn search(base: &str, query: &str) -> Result<Vec<HashMap<String, String>>, B
         map.insert("additional_info".to_string(), cap[5].to_string());
 
         println!(
-            "{}\t{}\t{}\t{}",
-            map["image_url"], map["media_id"],map["title"], map["additional_info"]);
+            "{}\t{}\t{}",
+            map["media_id"],map["title"], map["additional_info"]);
         // Push the map into the results vector
         result.push(map);
     }
