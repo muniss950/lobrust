@@ -2,6 +2,6 @@ A rust implementation of [justchokingaround/lobster](https://github.com/justchok
 ## Working: 
   - Showing list of movies/shows when searched as argument or as input.
 ## In progress:
-  - Getting the embed link for the
+  - Getting the embed link
   - Playing the video
   
